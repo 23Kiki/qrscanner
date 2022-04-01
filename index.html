@@ -30,7 +30,11 @@
                 console.log(`Scan result ${decodedText}`, decodedResult);
 				                console.log(`Scan result ${decodedText}`, decodedResult);
 				const myJSON = JSON.stringify(decodedResult);
-				document.getElementById("demo").innerHTML = myJSON;
+				let result = myJSON.substring(16, 18);
+				document.getElementById("demo").innerHTML = result;
+				if(result == 1){
+					window.location="http://192.168.1.2/card/";
+				}
             }
         }
 
