@@ -5,65 +5,40 @@
     <title>QR Scanner Demo</title>
 </head>
 <body>
-<h1>Scan from WebCam:</h1>
-<div id="video-container">
-    <video id="qr-video"></video>
-</div>
-<div>
-    <label>
-        Highlight Style
-        <select id="scan-region-highlight-style-select">
-            <option value="default-style">Default style</option>
-            <option value="example-style-1">Example custom style 1</option>
-            <option value="example-style-2">Example custom style 2</option>
-        </select>
-    </label>
-    <label>
-        <input id="show-scan-region" type="checkbox">
-        Show scan region canvas
-    </label>
-</div>
-<div>
-    <select id="inversion-mode-select">
-        <option value="original">Scan original (dark QR code on bright background)</option>
-        <option value="invert">Scan with inverted colors (bright QR code on dark background)</option>
-        <option value="both">Scan both</option>
-    </select>
-    <br>
-</div>
-<b>Device has camera: </b>
-<span id="cam-has-camera"></span>
-<br>
-<div>
-    <b>Preferred camera:</b>
-    <select id="cam-list">
-        <option value="environment" selected>Environment Facing (default)</option>
-        <option value="user">User Facing</option>
-    </select>
-</div>
-<b>Camera has flash: </b>
-<span id="cam-has-flash"></span>
-<div>
-    <button id="flash-toggle">📸 Flash: <span id="flash-state">off</span></button>
-</div>
-<br>
-<b>Detected QR code: </b>
-<span id="cam-qr-result">None</span>
-<br>
-<b>Last detected at: </b>
-<span id="cam-qr-result-timestamp"></span>
-<br>
-<button id="start-button">Start</button>
-<button id="stop-button">Stop</button>
-<hr>
+<div align="center" style="font-size:30px">
+	<div id="video-container">
+		<video id="qr-video"></video>
+	</div>
+	<div>
+		<select id="scan-region-highlight-style-select" style="display:none">
+			<option value="default-style" selected>Default style</option>
+		</select>
+		<label>
+			<input id="show-scan-region" type="checkbox" style="display:none">
+		</label>
+	</div>
+	<div>
+		<select id="inversion-mode-select" style="width:200px;font-size:20px">
+		    <option value="both">Scan both</option>
+			<option value="original">Scan original (dark QR code on bright background)</option>
+			<option value="invert">Scan with inverted colors (bright QR code on dark background)</option>
+		</select>
+		<br>
+	</div>
+	<span id="cam-has-camera" style="display:none"></span>
+	<div>
+		<b>Preferred camera:</b>
+		<select id="cam-list" style="width:200px;font-size:20px">
+			<option value="environment" selected>Environment Facing (default)</option>
+			<option value="user">User Facing</option>
+		</select>
+	</div>
+	<span id="cam-qr-result" style="display:none">None</span>
+	<button id="start-button" class='b_button'>Start</button>
+	<button id="stop-button" class='b_button'>Stop</button>
 
-<h1>Scan from File:</h1>
-<input type="file" id="file-selector">
-<b>Detected QR code: </b>
-<span id="file-qr-result">None</span>
+</div>
 
-<!--<script src="../qr-scanner.umd.min.js"></script>-->
-<!--<script src="../qr-scanner.legacy.min.js"></script>-->
 <script type="module">
     import QrScanner from "../qr-scanner.min.js";
 
@@ -73,19 +48,71 @@
     const camList = document.getElementById('cam-list');
     const camHasFlash = document.getElementById('cam-has-flash');
     const flashToggle = document.getElementById('flash-toggle');
-    const flashState = document.getElementById('flash-state');
     const camQrResult = document.getElementById('cam-qr-result');
-    const camQrResultTimestamp = document.getElementById('cam-qr-result-timestamp');
     const fileSelector = document.getElementById('file-selector');
     const fileQrResult = document.getElementById('file-qr-result');
 
     function setResult(label, result) {
         console.log(result.data);
         label.textContent = result.data;
-        camQrResultTimestamp.textContent = new Date().toString();
         label.style.color = 'teal';
         clearTimeout(label.highlightTimeout);
         label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
+		if (result.data == 0){
+			window.location="http://192/card/b/0.html";
+		} if else (result.data == 1){
+			window.location="http://192/card/b/building1.html";
+		} if else (result.data == 2){
+			window.location="http://192/card/b/building2.html";
+		} if else (result.data == 3){
+			window.location="http://192/card/b/building3.html";
+		} if else (result.data == 4){
+			window.location="http://192/card/b/building4.html";
+		} if else (result.data == 5){
+			window.location="http://192/card/b/building5.html";
+		} if else (result.data == 6){
+			window.location="http://192/card/b/building6.html";
+		} if else (result.data == 7){
+			window.location="http://192/card/b/building7.html";
+		} if else (result.data == 8){
+			window.location="http://192/card/b/building8.html";
+		} if else (result.data == 9){
+			window.location="http://192/card/b/building9.html";
+		} if else (result.data == 10){
+			window.location="http://192/card/b/building10.html";
+		} if else (result.data == 11){
+			window.location="http://192/card/b/building11.html";
+		} if else (result.data == 12){
+			window.location="http://192/card/b/building12.html";
+		} if else (result.data == 13){
+			window.location="http://192/card/b/building13.html";
+		} if else (result.data == 14){
+			window.location="http://192/card/b/building14.html";
+		} if else (result.data == 15){
+			window.location="http://192/card/b/building15.html";
+		} if else (result.data == 16){
+			window.location="http://192/card/b/building16.html";
+		} if else (result.data == 17){
+			window.location="http://192/card/b/building17.html";
+		} if else (result.data == 18){
+			window.location="http://192/card/b/building18.html";
+		} if else (result.data == 19){
+			window.location="http://192/card/b/building19.html";
+		} if else (result.data == 20){
+			window.location="http://192/card/b/building20.html";
+		} if else (result.data == 21){
+			window.location="http://192/card/b/building21.html";
+		} if else (result.data == 22){
+			window.location="http://192/card/b/building22.html";
+		} if else (result.data == 23){
+			window.location="http://192/card/b/building23.html";
+		} if else (result.data == 24){
+			window.location="http://192/card/b/building24.html";
+		} if else (result.data == 25){
+			window.location="http://192/card/b/building25.html";
+		} if else (result.data == 26){
+			window.location="http://192/card/b/building26.html";
+		} 
     }
 
     // ####### Web Cam Scanning #######
@@ -99,13 +126,8 @@
         highlightCodeOutline: true,
     });
 
-    const updateFlashAvailability = () => {
-        scanner.hasFlash().then(hasFlash => {
-            camHasFlash.textContent = hasFlash;
-            flashToggle.style.display = hasFlash ? 'inline-block' : 'none';
-        });
-    };
 
+	
     scanner.start().then(() => {
         updateFlashAvailability();
         // List cameras after the scanner started to avoid listCamera's stream and the scanner's stream being requested
@@ -145,9 +167,6 @@
         scanner.setCamera(event.target.value).then(updateFlashAvailability);
     });
 
-    flashToggle.addEventListener('click', () => {
-        scanner.toggleFlash().then(() => flashState.textContent = scanner.isFlashOn() ? 'on' : 'off');
-    });
 
     document.getElementById('start-button').addEventListener('click', () => {
         scanner.start();
@@ -176,44 +195,33 @@
     }
 
     #video-container {
+
         line-height: 0;
     }
 
-    #video-container.example-style-1 .scan-region-highlight-svg,
-    #video-container.example-style-1 .code-outline-highlight {
-        stroke: #64a2f3 !important;
-    }
+.b_button {
+  bottom: 38px;
+  width: 150px;
+  height: 52px;
+  font-size: 30px;
+  font-weight: 500px;
+  background-color: #6c926a;
+  transition: all 0.3s;
+}
 
-    #video-container.example-style-2 {
-        position: relative;
-        width: max-content;
-        height: max-content;
-        overflow: hidden;
-    }
-    #video-container.example-style-2 .scan-region-highlight {
-        border-radius: 30px;
-        outline: rgba(0, 0, 0, .25) solid 50vmax;
-    }
-    #video-container.example-style-2 .scan-region-highlight-svg {
-        display: none;
-    }
-    #video-container.example-style-2 .code-outline-highlight {
-        stroke: rgba(255, 255, 255, .5) !important;
-        stroke-width: 15 !important;
-        stroke-dasharray: none !important;
-    }
+.b_button:hover {
+  background-color: #E30143;
+}
 
-    #flash-toggle {
-        display: none;
-    }
+body {
+  margin-top: 50px;
+  background-color: #f4f4f4;
+  font-family: 'Raleway', sans-serif;
+  font-size: 62.5%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    hr {
-        margin-top: 32px;
-    }
-    input[type="file"] {
-        display: block;
-        margin-bottom: 16px;
-    }
 </style>
 </body>
 </html>
