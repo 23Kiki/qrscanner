@@ -1,227 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>QR Scanner Demo</title>
-</head>
-<body>
-<div align="center" style="font-size:30px">
-	<div id="video-container">
-		<video id="qr-video"></video>
-	</div>
-	<div>
-		<select id="scan-region-highlight-style-select" style="display:none">
-			<option value="default-style" selected>Default style</option>
-		</select>
-		<label>
-			<input id="show-scan-region" type="checkbox" style="display:none">
-		</label>
-	</div>
-	<div>
-		<select id="inversion-mode-select" style="width:200px;font-size:20px">
-		    <option value="both">Scan both</option>
-			<option value="original">Scan original (dark QR code on bright background)</option>
-			<option value="invert">Scan with inverted colors (bright QR code on dark background)</option>
-		</select>
-		<br>
-	</div>
-	<span id="cam-has-camera" style="display:none"></span>
-	<div>
-		<b>Preferred camera:</b>
-		<select id="cam-list" style="width:200px;font-size:20px">
-			<option value="environment" selected>Environment Facing (default)</option>
-			<option value="user">User Facing</option>
-		</select>
-	</div>
-	<span id="cam-qr-result" style="display:none">None</span>
-	<button id="start-button" class='b_button'>Start</button>
-	<button id="stop-button" class='b_button'>Stop</button>
+<div>Teachable Machine Audio Model - p5.js and ml5.js</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+<script type="text/javascript">
+  // Global variable to store the classifier
+let classifier;
 
-</div>
+// Label
+let label = 'listening...';
 
-<script type="module">
-    import QrScanner from "../qr-scanner.min.js";
-
-    const video = document.getElementById('qr-video');
-    const videoContainer = document.getElementById('video-container');
-    const camHasCamera = document.getElementById('cam-has-camera');
-    const camList = document.getElementById('cam-list');
-    const camHasFlash = document.getElementById('cam-has-flash');
-    const flashToggle = document.getElementById('flash-toggle');
-    const camQrResult = document.getElementById('cam-qr-result');
-    const fileSelector = document.getElementById('file-selector');
-    const fileQrResult = document.getElementById('file-qr-result');
-
-    function setResult(label, result) {
-        console.log(result.data);
-        label.textContent = result.data;
-        label.style.color = 'teal';
-        clearTimeout(label.highlightTimeout);
-        label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
-		if (result.data == 00){
-			window.location="http://192.168.1.2/card/b/0.html";
-		} else if (result.data == 1){
-			window.location="http://192.168.1.2/card/b/building1.html";
-		} else if (result.data == 2){
-			window.location="http://192/card/b/building2.html";
-		} else if (result.data == 3){
-			window.location="http://192/card/b/building3.html";
-		} else if (result.data == 4){
-			window.location="http://192/card/b/building4.html";
-		} else if (result.data == 5){
-			window.location="http://192/card/b/building5.html";
-		} else if (result.data == 6){
-			window.location="http://192.168.1.2/card/b/building6.html";
-		} else if (result.data == 7){
-			window.location="http://192/card/b/building7.html";
-		} else if (result.data == 8){
-			window.location="http://192/card/b/building8.html";
-		} else if (result.data == 9){
-			window.location="http://192/card/b/building9.html";
-		} else if (result.data == 10){
-			window.location="http://192/card/b/building10.html";
-		} else if (result.data == 11){
-			window.location="http://192/card/b/building11.html";
-		} else if (result.data == 12){
-			window.location="http://192/card/b/building12.html";
-		} else if (result.data == 13){
-			window.location="http://192/card/b/building13.html";
-		} else if (result.data == 14){
-			window.location="http://192/card/b/building14.html";
-		} else if (result.data == 15){
-			window.location="http://192/card/b/building15.html";
-		} else if (result.data == 16){
-			window.location="http://192/card/b/building16.html";
-		} else if (result.data == 17){
-			window.location="http://192/card/b/building17.html";
-		} else if (result.data == 18){
-			window.location="http://192/card/b/building18.html";
-		} else if (result.data == 19){
-			window.location="http://192/card/b/building19.html";
-		} else if (result.data == 20){
-			window.location="http://192/card/b/building20.html";
-		} else if (result.data == 21){
-			window.location="http://192/card/b/building21.html";
-		} else if (result.data == 22){
-			window.location="http://192/card/b/building22.html";
-		} else if (result.data == 23){
-			window.location="http://192/card/b/building23.html";
-		} else if (result.data == 24){
-			window.location="http://192/card/b/building24.html";
-		} else if (result.data == 25){
-			window.location="http://192/card/b/building25.html";
-		} else if (result.data == 26){
-			window.location="http://192/card/b/building26.html";
-		} 
-    }
-
-    // ####### Web Cam Scanning #######
-
-    const scanner = new QrScanner(video, result => setResult(camQrResult, result), {
-        onDecodeError: error => {
-            camQrResult.textContent = error;
-            camQrResult.style.color = 'inherit';
-        },
-        highlightScanRegion: true,
-        highlightCodeOutline: true,
-    });
+// Teachable Machine model URL:
+let soundModel = 'https://teachablemachine.withgoogle.com/models/wsGFXvwF_/';
 
 
-	
-    scanner.start().then(() => {
-        updateFlashAvailability();
-        // List cameras after the scanner started to avoid listCamera's stream and the scanner's stream being requested
-        // at the same time which can result in listCamera's unconstrained stream also being offered to the scanner.
-        // Note that we can also start the scanner after listCameras, we just have it this way around in the demo to
-        // start the scanner earlier.
-        QrScanner.listCameras(true).then(cameras => cameras.forEach(camera => {
-            const option = document.createElement('option');
-            option.value = camera.id;
-            option.text = camera.label;
-            camList.add(option);
-        }));
-    });
+function preload() {
+  // Load the model
+  classifier = ml5.soundClassifier(soundModel + 'model.json');
+}
 
-    QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
+function setup() {
+  createCanvas(320, 240);
+  // Start classifying
+  // The sound model will continuously listen to the microphone
+  classifier.classify(gotResult);
+}
 
-    // for debugging
-    window.scanner = scanner;
-
-    document.getElementById('scan-region-highlight-style-select').addEventListener('change', (e) => {
-        videoContainer.className = e.target.value;
-        scanner._updateOverlay(); // reposition the highlight because style 2 sets position: relative
-    });
-
-    document.getElementById('show-scan-region').addEventListener('change', (e) => {
-        const input = e.target;
-        const label = input.parentNode;
-        label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
-        scanner.$canvas.style.display = input.checked ? 'block' : 'none';
-    });
-
-    document.getElementById('inversion-mode-select').addEventListener('change', event => {
-        scanner.setInversionMode(event.target.value);
-    });
-
-    camList.addEventListener('change', event => {
-        scanner.setCamera(event.target.value).then(updateFlashAvailability);
-    });
+function draw() {
+  background(0);
+  // Draw the label in the canvas
+  fill(255);
+  textSize(32);
+  textAlign(CENTER, CENTER);
+  text(label, width / 2, height / 2);
+}
 
 
-    document.getElementById('start-button').addEventListener('click', () => {
-        scanner.start();
-    });
+// The model recognizing a sound will trigger this event
+function gotResult(error, results) {
+  if (error) {
+    console.error(error);
+    return;
+  }
+  // The results are in an array ordered by confidence.
+  // console.log(results[0]);
+  label = results[0].label;
 
-    document.getElementById('stop-button').addEventListener('click', () => {
-        scanner.stop();
-    });
-
-    // ####### File Scanning #######
-
-    fileSelector.addEventListener('change', event => {
-        const file = fileSelector.files[0];
-        if (!file) {
-            return;
-        }
-        QrScanner.scanImage(file, { returnDetailedScanResult: true })
-            .then(result => setResult(fileQrResult, result))
-            .catch(e => setResult(fileQrResult, { data: e || 'No QR code found.' }));
-    });
+  const Http = new XMLHttpRequest();
+				Http.open("GET","https://192.168.1.13/tachable/state1.php?s=" + label);
+				Http.send();
+}
 </script>
-
-<style>
-    div {
-        margin-bottom: 16px;
-    }
-
-    #video-container {
-
-        line-height: 0;
-    }
-
-.b_button {
-  bottom: 38px;
-  width: 150px;
-  height: 52px;
-  font-size: 30px;
-  font-weight: 500px;
-  background-color: #6c926a;
-  transition: all 0.3s;
-}
-
-.b_button:hover {
-  background-color: #E30143;
-}
-
-body {
-  margin-top: 50px;
-  background-color: #f4f4f4;
-  font-family: 'Raleway', sans-serif;
-  font-size: 62.5%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-</style>
-</body>
-</html>
