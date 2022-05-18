@@ -47,27 +47,27 @@ function gotResult(error, results) {
   if (label == 'dag barking'){
   //alert('dag barking');
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 1);
+  Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 1);
   Http.send();	  
   } else if (label == 'noise 2'){
   //alert('2'); 
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 2);
+  Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 2);
   Http.send();	 	  
   } else if (label == 'peaple'){
   //alert('3');
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 3);
+  Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 3);
   Http.send();		  
   }else if (label == 'street'){
   //alert('4');
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 4);
+  Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 4);
   Http.send();		  
   } else{
   //alert('back');
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 0);
+  Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 0);
   Http.send();		  
   }
 
