@@ -45,7 +45,7 @@ function gotResult(error, results) {
   // console.log(results[0]);
   label = results[0].label;
   if (label == 'dag barking'){
-  alert('dag barking');
+  //alert('dag barking');
   const Http = new XMLHttpRequest();
   Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 1);
   Http.send();	  
@@ -55,17 +55,17 @@ function gotResult(error, results) {
   Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 2);
   Http.send();	 	  
   } else if (label == 'peaple'){
-  alert('3');
+  //alert('3');
   const Http = new XMLHttpRequest();
   Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 3);
   Http.send();		  
   }else if (label == 'street'){
-  alert('4');
+  //alert('4');
   const Http = new XMLHttpRequest();
   Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 4);
   Http.send();		  
   } else{
-  alert('back');
+  //alert('back');
   const Http = new XMLHttpRequest();
   Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 0);
   Http.send();		  
