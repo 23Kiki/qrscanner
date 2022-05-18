@@ -44,9 +44,27 @@ function gotResult(error, results) {
   // The results are in an array ordered by confidence.
   // console.log(results[0]);
   label = results[0].label;
-
+  if (label == 'dag barking'){
   const Http = new XMLHttpRequest();
-				Http.open("GET","https://192.168.8.113/tachable/state1.php?s=" + label);
-				Http.send();
+  Http.open("GET","https://192.168.8.113/tachable/state1.php?s=" + 1);
+  Http.send();	  
+  } else if (label == 'noise 2'){
+  const Http = new XMLHttpRequest();
+  Http.open("GET","https://192.168.8.113/tachable/state1.php?s=" + 2);
+  Http.send();	 	  
+  } else if (label == 'peaple'){
+  const Http = new XMLHttpRequest();
+  Http.open("GET","https://192.168.8.113/tachable/state1.php?s=" + 3);
+  Http.send();		  
+  }else if (label == 'street'){
+  const Http = new XMLHttpRequest();
+  Http.open("GET","https://192.168.8.113/tachable/state1.php?s=" + 4);
+  Http.send();		  
+  } else{
+  const Http = new XMLHttpRequest();
+  Http.open("GET","https://192.168.8.113/tachable/state1.php?s=" + 0);
+  Http.send();		  
+  }
+
 }
 </script>
