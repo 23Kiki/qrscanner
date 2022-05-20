@@ -45,7 +45,8 @@ function gotResult(error, results) {
   // The results are in an array ordered by confidence.
   // console.log(results[0]);
   label = results[0].label;
-  if (label == 'dag barking'){
+  label2 =  label.trim();
+  if (label2 == 'dag barking'){
   //alert('dag barking');
   const Http = new XMLHttpRequest();
   Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 1);
