@@ -23,6 +23,7 @@ function setup() {
   // Start classifying
   // The sound model will continuously listen to the microphone
   classifier.classify(gotResult);
+  
 }
 
 function draw() {
@@ -47,12 +48,12 @@ function gotResult(error, results) {
   if (label == 'dag barking'){
   //alert('dag barking');
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.1.13/teachable/state1.php?s=" + 1);
+  Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 1);
   Http.send();	  
   } else{
   //alert('back');
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.1.13/teachable/state1.php?s=" + 0);
+  Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 0);
   Http.send();		  
   }
 }
