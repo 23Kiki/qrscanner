@@ -47,12 +47,12 @@ function gotResult(error, results) {
   label = results[0].label;
   label2 =  label.trim();
   if (label2 == 'dag barking'){
-  //alert('dag barking');
+  alert('dag barking');
   const Http = new XMLHttpRequest();
   Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 1);
   Http.send();	  
   } else{
-  //alert('back');
+  alert('back');
   const Http = new XMLHttpRequest();
   Http.open("GET","http://192.168.1.13/tachable/state1.php?s=" + 0);
   Http.send();		  
