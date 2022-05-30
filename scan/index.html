@@ -50,12 +50,12 @@ function gotResult(error, results) {
   if (label2 == 'dag barking'){
   //alert('dag barking');
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 1);
+  Http.open("GET","http://192.168.8.103/teachable/state1.php?s=" + 1);
   Http.send();	  
   } else{
   //alert('back');
   const Http = new XMLHttpRequest();
-  Http.open("GET","http://192.168.8.113/teachable/state1.php?s=" + 0);
+  Http.open("GET","http://192.168.8.103/teachable/state1.php?s=" + 0);
   Http.send();		  
   }
 }
